@@ -1,5 +1,4 @@
-# Minecraft Modpack Manifest Comparator
-
+# Minecraft Modpack Change-log-o-matic
 A Python utility for comparing Minecraft modpack manifest files to generate a detailed changelog between versions.
 
 ## Overview
