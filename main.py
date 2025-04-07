@@ -186,6 +186,7 @@ def scrape_mod_info(project_id: int, cache: Optional[CurseForgeCache] = None) ->
     if cache:
         cached_info = cache.get_mod_info(project_id)
         if cached_info:
+            print("Cached")
             return cached_info
     
     # Try different URL formats
@@ -201,9 +202,12 @@ def scrape_mod_info(project_id: int, cache: Optional[CurseForgeCache] = None) ->
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             }
             
+            print('1')
+            
             response = requests.get(url, headers=headers, timeout=10)
             
             if response.status_code != 200:
+                print(f"nope: {response.status_code}")
                 continue  # Try next URL if this one fails
                 
             # Parse the HTML
@@ -211,6 +215,7 @@ def scrape_mod_info(project_id: int, cache: Optional[CurseForgeCache] = None) ->
             
             # Extract mod name from the title
             title_element = soup.find("h1", class_="project-title") or soup.select_one("h1.text-xl")
+            print(f"title_element: {title_element}")
             
             if not title_element:
                 # Try other common selectors
@@ -683,4 +688,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    results = scrape_mod_info('1226739')
+    print(results)
